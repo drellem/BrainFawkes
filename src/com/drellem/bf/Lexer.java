@@ -10,7 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Scans the compressed Brainfuck file and creates a <code>TokenStream</code>.
  * @author Daniel Miller <a href="mailto:gate46dmiller@gmail.com">gate46dmiller@gmail.com</a>
  */
 public class Lexer {
@@ -21,7 +21,11 @@ public class Lexer {
     public TokenStream lex(){
         return lex(inputFile);
     }
-    
+    /**
+     * Lex a non-compressed Brainfuck file.
+     * @param inputFile
+     * @return 
+     */
     public TokenStream lex(String inputFile){
         new Compressor().run(inputFile, inputFile + "c");
         inputFile = inputFile + "c";

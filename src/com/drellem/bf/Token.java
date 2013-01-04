@@ -6,7 +6,7 @@
 package com.drellem.bf;
 
 /**
- *
+ * Represents a <code>Token</code>.
  * @author Daniel Miller <a href="mailto:gate46dmiller@gmail.com">gate46dmiller@gmail.com</a>
  */
 public class Token {

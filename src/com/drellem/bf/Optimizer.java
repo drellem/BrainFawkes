@@ -12,7 +12,7 @@ import com.drellem.bf.passes.CleanPass;
 import com.drellem.bf.passes.CopyClearPass;
 
 /**
- *
+ * Runs various optimization passes through the syntax tree.
  * @author Daniel Miller <a href="mailto:gate46dmiller@gmail.com">gate46dmiller@gmail.com</a>
  */
 public class Optimizer {
@@ -24,17 +24,19 @@ public class Optimizer {
     public Optimizer(TokenStream tokens){
         this.tokens = tokens;
     }
-    
+    /**
+     * Runs the optimization passes.
+     * @return The resultant syntax tree.
+     */
     public ASTree run(){
         tree = parse(false, tokens);
         System.out.println(passes.length);
-        /*
+        
         for (OpPass p : passes){
             tree = p.pass(tree);
         }
-        * */
+        
         Node n;
-        tree = passes[1].pass(tree);
         while(tree.hasNext()){
             n = tree.getNext();
             System.out.println("Type:" + n.getType().toString());
@@ -46,7 +48,12 @@ public class Optimizer {
         return tree;
     }
     
-    
+    /**
+     * Turns a <code>TokenStream</code> into an <code>ASTree</code>.
+     * @param inLoop Tells the method if it is being called recursively.
+     * @param tokens
+     * @return
+     */
     public ASTree parse(boolean inLoop, TokenStream tokens){
         ASTree tree = new ASTree();
         while(tokens.hasNext()){

@@ -8,7 +8,7 @@ package com.drellem.bf;
 import java.util.ArrayList;
 
 /**
- *
+ * Represents a node of the syntax tree (<code>ASTree</code>).
  * @author Daniel Miller <a href="mailto:gate46dmiller@gmail.com">gate46dmiller@gmail.com</a>
  */
 public class Node {
@@ -19,6 +19,10 @@ public class Node {
             addNode(tree.getNext());
         }
     }
+    /**
+     * Represents the <code>Node</code>, which is presumably a <code>LoopNode</code>, into a tree.
+     * @return 
+     */
     public ASTree toTree(){
         ASTree ret = new ASTree();
         for(Node n : childNodes){
@@ -38,7 +42,9 @@ public class Node {
     public LoopNode loopNode(){ return new LoopNode(); }
     public ClearNode clearNode(int relativeCell){ return new ClearNode(relativeCell); }
     
-    
+    /**
+     * <code>+</code>
+     */
     public class PlusNode extends Node {
         private int relativeCell, numTimes;
         public PlusNode(int relativeCell, int numTimes){
@@ -50,7 +56,9 @@ public class Node {
         public int getRelativeCell(){ return relativeCell; }
         public int getNumTimes(){ return numTimes; }
     }
-    
+    /**
+     * <code>-</code>
+     */
     public class MinusNode extends Node {
         private int relativeCell, numTimes;
         public MinusNode(int relativeCell, int numTimes){
@@ -62,7 +70,9 @@ public class Node {
         public int getRelativeCell(){ return relativeCell; }
         public int getNumTimes(){ return numTimes; }
     }
-    
+    /**
+     * <code>></code>
+     */
     public class IncNode extends Node {    
         private int numTimes;
         public IncNode(int numTimes){
@@ -72,7 +82,9 @@ public class Node {
         public NodeType getType(){ return NodeType.INC; }
         public int getNumTimes(){ return numTimes; }
     }
-    
+    /**
+     * <code><</code>
+     */
     public class DecNode extends Node {
         private int numTimes;
         public DecNode(int numTimes){
@@ -82,7 +94,9 @@ public class Node {
         public NodeType getType(){ return NodeType.DEC; }
         public int getNumTimes(){ return numTimes; }
     }
-    
+    /**
+     * <code>,</code>
+     */
     public class GetNode extends Node {
         private int relativeCell;
         public GetNode(int relativeCell){
@@ -92,7 +106,9 @@ public class Node {
         public NodeType getType(){ return NodeType.GET; }
         public int getRelativeCell(){ return relativeCell; }
     }
-    
+    /**
+     * <code>.</code>.
+     */
     public class PutNode extends Node {
         private int relativeCell;
         public PutNode(int relativeCell){
@@ -102,7 +118,9 @@ public class Node {
         public NodeType getType(){ return NodeType.PUT; }
         public int getRelativeCell(){ return relativeCell; }
     }
-    
+    /**
+     * <code>[</code>...<code>]</code>.
+     */
     public class LoopNode extends Node {
         public boolean interpretable(){
             for (Node n : childNodes){
@@ -117,7 +135,9 @@ public class Node {
         @Override
         public NodeType getType(){ return NodeType.LOOP; }
     }
-    
+    /**
+     * Clears the current cell: <code>[-]</code>.
+     */
     public class ClearNode extends Node {
         private int relativeCell;
         public ClearNode(int relativeCell){
@@ -127,7 +147,7 @@ public class Node {
         public NodeType getType(){ return NodeType.CLEAR; }
         public int getRelativeCell(){ return relativeCell; }
     }
-    
+
     public enum NodeType {
         PLUS, MINUS, INC, DEC, GET, PUT, LOOP, CLEAR, NONE
     }

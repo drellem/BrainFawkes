@@ -31,7 +31,7 @@ public class Generator {
         this.outputFile = outputFile;
         ostream = new BufferedWriter(new FileWriter(outputFile));
     }
-    
+    /**Begins code generation*/
     public void generate() throws IOException{
         Node node;
         PlusNode temp1;
@@ -128,7 +128,7 @@ public class Generator {
             }
         }
     }
-    
+    /*Interprets a node, instead of generating code*/
     public void cleanInterpret(Node n) throws IOException{
         switch(n.getType()){
             case PLUS:

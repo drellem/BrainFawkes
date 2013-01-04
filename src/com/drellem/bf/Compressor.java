@@ -10,7 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Compresses the source code so that <code>++---</code> becomes <code>-</code>.
  * @author Daniel Miller <a href="mailto:gate46dmiller@gmail.com">gate46dmiller@gmail.com</a>
  */
 public class Compressor {
@@ -20,6 +20,7 @@ public class Compressor {
     private int lbrackets = 0;
     private int rbrackets = 0;
 
+    /**Begins compression*/
     public void run(String inputFile, String outputFile) {
         try {
             this.istream = new BufferedReader(new FileReader(inputFile));
