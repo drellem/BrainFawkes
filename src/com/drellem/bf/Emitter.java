@@ -22,7 +22,7 @@ public interface Emitter {
     public void put(int relativeCell) throws IOException;
     public void loop() throws IOException;
     public void endLoop() throws IOException;
-    public void clear() throws IOException;
+    public void clear(int relativeCell) throws IOException;
     public void putConstant(byte b) throws IOException;
     public void end() throws IOException;
 }

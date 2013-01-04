@@ -74,8 +74,8 @@ public class JavaEmitter implements Emitter{
     }
 
     @Override
-    public void clear() throws IOException {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void clear(int relativeCell) throws IOException {
+        ostream.write("\t\ttape[index+" + relativeCell + "] = 0;\n");
     }
 
     @Override
