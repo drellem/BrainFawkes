@@ -5,6 +5,7 @@
 
 package com.drellem.bf;
 
+import com.drellem.bf.Node.PlusNode;
 import com.drellem.bf.passes.OpPass;
 import com.drellem.bf.passes.PointerPass;
 import com.drellem.bf.Token.TokenType;
@@ -30,20 +31,30 @@ public class Optimizer {
      */
     public ASTree run(){
         tree = parse(false, tokens);
-        System.out.println(passes.length);
+        //System.out.println(passes.length);
         
         for (OpPass p : passes){
             tree = p.pass(tree);
         }
         
+        //PlusNode p;
         Node n;
         while(tree.hasNext()){
-            n = tree.getNext();
+            n = tree.getNext();/*
+            if(n instanceof PlusNode){
+                p = (PlusNode)n;
+                System.out.println("Type:" + n.getType().toString()+ " Cell:" + p.getRelativeCell());
+            } else*/
             System.out.println("Type:" + n.getType().toString());
             for (Node no : n.childNodes){
+               /* if(no instanceof PlusNode){
+                    p = (PlusNode)no;
+                    System.out.println("Type:" + n.getType().toString()+ " Cell:" + p.getRelativeCell());
+                } else*/
                 System.out.println("->Type:"+no.getType().toString());
             }
         }
+        
         //tree = passes[2].pass(tree);
         return tree;
     }
