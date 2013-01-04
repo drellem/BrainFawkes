@@ -11,7 +11,7 @@ Hello world: <code>++++++++++ Initialize counter[>+++++ ++>+++++ +++++>++>+<<<<-
 
 <ol>
   <li>Compression</li>
-  The Brainfuck code is compressed so that <code>++---<<>>>></code> will become <code>-2>></code>.
+  The Brainfuck code is compressed so that <code>++---<<>>>>>></code> will become <code>-2>></code>.
   Hello world: <code>10+[>7+>10+>2+>+4<-]>2+.>+.7+..3+.6-.8-.>+.>.</code>
   
   </li>Lexing</li>
