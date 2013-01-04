@@ -23,7 +23,7 @@ public class Lexer {
     }
     
     public TokenStream lex(String inputFile){
-        new Compressor().run(inputFile, inputFile + ".c");
+        new Compressor().run(inputFile, inputFile + "c");
         inputFile = inputFile + "c";
         return lexCompressed(inputFile);
     }

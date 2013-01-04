@@ -27,9 +27,22 @@ public class Optimizer {
     
     public ASTree run(){
         tree = parse(false, tokens);
+        System.out.println(passes.length);
+        /*
         for (OpPass p : passes){
             tree = p.pass(tree);
         }
+        * */
+        Node n;
+        tree = passes[1].pass(tree);
+        while(tree.hasNext()){
+            n = tree.getNext();
+            System.out.println("Type:" + n.getType().toString());
+            for (Node no : n.childNodes){
+                System.out.println("->Type:"+no.getType().toString());
+            }
+        }
+        //tree = passes[2].pass(tree);
         return tree;
     }
     

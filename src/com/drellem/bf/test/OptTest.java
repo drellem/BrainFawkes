@@ -24,7 +24,7 @@ public class OptTest {
             f.createNewFile();
             w = new BufferedWriter(new FileWriter("hello.b"));
             r = new BufferedReader(new FileReader("hello.bc"));
-            w.write("++++++++++ Initialize counter" +
+            w.write(">++++++++++ Initialize counter" +
                     "[" +
                     ">+++++ ++" +
                     ">+++++ +++++" +
@@ -60,6 +60,7 @@ public class OptTest {
         Optimizer opt = new Optimizer(t);
         ASTree tree = opt.run();
         Node n;
+        /**
         while(tree.hasNext()){
             n = tree.getNext();
             System.out.println("Type:" + n.getType().toString());
@@ -67,5 +68,6 @@ public class OptTest {
                 System.out.println("->Type:"+no.getType().toString());
             }
         }
+        * */
     }
 }

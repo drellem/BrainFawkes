@@ -15,6 +15,7 @@ import com.drellem.bf.Node.NodeType;
  */
 public class PointerPass implements OpPass{
     private ASTree returnTree = new ASTree();
+    private boolean nest = false;
 
     @Override
     public ASTree pass(ASTree tree) {
@@ -22,7 +23,7 @@ public class PointerPass implements OpPass{
         int relativeIndex = 0;
         while(tree.hasNext()){
             n = tree.getNext();
-            
+            System.out.println("Pre; Type:" + n.getType().toString());
             switch(n.getType()){
                 
                 case PLUS:
@@ -37,12 +38,12 @@ public class PointerPass implements OpPass{
                     
                 case INC:
                     Node.IncNode temp2 = (Node.IncNode)n;
-                    returnTree.append(n.incNode(temp2.getNumTimes()));
+                    relativeIndex += temp2.getNumTimes();
                     break;
                     
                 case DEC:
                     Node.DecNode temp3 = (Node.DecNode)n;
-                    returnTree.append(n.decNode(temp3.getNumTimes()));
+                    relativeIndex -= temp3.getNumTimes();
                     break;
                     
                 case GET:
@@ -59,7 +60,9 @@ public class PointerPass implements OpPass{
                 case LOOP:
                     returnTree.append(n.incNode(relativeIndex));
                     relativeIndex = 0;
-                    returnTree.append(n);
+                    System.out.println(nest);
+                    nest = true;
+                    returnTree.append(pass(n.toTree()));
                     break;
                     
                 case CLEAR:
@@ -71,6 +74,7 @@ public class PointerPass implements OpPass{
                     System.err.println("Unrecognized node: " + n.getType());
             }
         }
+        nest = false;    
         return returnTree;
     }
     

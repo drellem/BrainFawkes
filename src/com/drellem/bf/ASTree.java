@@ -5,6 +5,8 @@
 
 package com.drellem.bf;
 
+import com.drellem.bf.Node.LoopNode;
+import com.drellem.bf.Node.NodeType;
 import java.util.ArrayList;
 
 /**
@@ -14,14 +16,19 @@ import java.util.ArrayList;
 public class ASTree {
     private ArrayList<Node> nodes = new ArrayList<Node>();
     int location = -1;
+    private NodeType type;
+    private Node n = new Node();
     
     public void append(Node node){ nodes.add(node); }
     public void append(ASTree tree){
-        while(tree.hasNext()){
-            append(tree.getNext());
-        }
+        LoopNode node = n.loopNode();
+        while(tree.hasNext())
+            node.addNode(tree.getNext());
+        nodes.add(node);
     }
     public void setLocation(int location){ this.location = location; }
     public Node getNext(){ return nodes.get(++location); }
     public boolean hasNext(){ return location < nodes.size()-1; }
+    public void setType(Node.NodeType type){ this.type = type; }
+    public Node.NodeType getType(){ return this.type; }
 }

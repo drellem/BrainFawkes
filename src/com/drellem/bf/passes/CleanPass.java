@@ -28,21 +28,25 @@ public class CleanPass implements OpPass{
                 case PLUS:
                     Node.PlusNode temp = (Node.PlusNode)n;
                     if(temp.getNumTimes()!=0)returnTree.append(n);
+                    else System.out.println("Deleted PLUS");
                     break;
                     
                 case MINUS:
                     Node.MinusNode temp1 = (Node.MinusNode)n;
                     if(temp1.getNumTimes()!=0)returnTree.append(n);
+                    else System.out.println("Deleted MINUS");
                     break;
                     
                 case INC:
                     Node.IncNode temp2 = (Node.IncNode)n;
                     if(temp2.getNumTimes()!=0)returnTree.append(n);
+                    else System.out.println("Deleted INC");
                     break;
                     
                 case DEC:
                     Node.DecNode temp3 = (Node.DecNode)n;
                     if(temp3.getNumTimes()!=0)returnTree.append(n);
+                    else System.out.println("Deleted DEC");
                     break;
                     
                 default:
