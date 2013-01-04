@@ -3,15 +3,17 @@
  * and open the template in the editor.
  */
 
-package com.drellem.bf;
+package com.drellem.bf.passes;
 
+import com.drellem.bf.ASTree;
+import com.drellem.bf.Node;
 import com.drellem.bf.Node.NodeType;
 
 /**
  * Propagates pointers.
  * @author Daniel Miller <a href="mailto:gate46dmiller@gmail.com">gate46dmiller@gmail.com</a>
  */
-public class PointerClass implements OpPass{
+public class PointerPass implements OpPass{
     private ASTree returnTree = new ASTree();
 
     @Override

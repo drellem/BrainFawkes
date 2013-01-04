@@ -7,7 +7,6 @@ package com.drellem.bf.passes;
 
 import com.drellem.bf.ASTree;
 import com.drellem.bf.Node;
-import com.drellem.bf.OpPass;
 import com.drellem.bf.Node.NodeType;
 
 /**

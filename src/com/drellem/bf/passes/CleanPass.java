@@ -3,8 +3,11 @@
  * and open the template in the editor.
  */
 
-package com.drellem.bf;
+package com.drellem.bf.passes;
 
+import com.drellem.bf.ASTree;
+import com.drellem.bf.Node;
+import com.drellem.bf.passes.OpPass;
 import com.drellem.bf.Node.NodeType;
 
 /**

@@ -5,6 +5,7 @@
 
 package com.drellem.bf;
 
+import com.drellem.bf.emit.Emitter;
 import com.drellem.bf.Node.*;
 import java.io.BufferedWriter;
 import java.io.FileWriter;

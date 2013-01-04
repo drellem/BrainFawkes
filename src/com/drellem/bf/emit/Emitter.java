@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package com.drellem.bf;
+package com.drellem.bf.emit;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
