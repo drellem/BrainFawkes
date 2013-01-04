@@ -15,7 +15,7 @@ import java.io.IOException;
  * It generates code by calling a pluggable, language-specific back-end that implements <code>Emitter</code>.
  * @author Daniel Miller <a href="mailto:gate46dmiller@gmail.com">gate46dmiller@gmail.com</a>
  */
-public class Generater {
+public class Generator {
     private byte[] tape = new byte[30000];
     private int index = 0;
     private ASTree tree;
@@ -24,7 +24,7 @@ public class Generater {
     private BufferedWriter ostream;
     private boolean canInterpret = true;
     
-    public Generater(ASTree tree, Emitter e, String outputFile) throws IOException{
+    public Generator(ASTree tree, Emitter e, String outputFile) throws IOException{
         this.tree = tree;
         this.e = e;
         this.outputFile = outputFile;
@@ -49,17 +49,26 @@ public class Generater {
                 
                 case PLUS:
                     temp1 = (PlusNode)node;
-                    if(canInterpret) 
-                        tape[index+temp1.getRelativeCell()] += temp1.getNumTimes();
+                    if(canInterpret){
+                        int a = index + temp1.getRelativeCell();
+                        if(a==0)
+                            tape[a] = (byte)temp1.getNumTimes();
+                        else tape[a] += temp1.getNumTimes();   
+                    } 
+                        
                      else 
                         e.plus(temp1.getNumTimes(), temp1.getRelativeCell());
                      break;
                     
                 case MINUS:
                     temp2 = (MinusNode)node;
-                    if(canInterpret)
-                        tape[index+temp2.getRelativeCell()] -= temp2.getNumTimes();
-                    else
+                    if(canInterpret){
+                        int a = index + temp2.getRelativeCell();
+                        if(a==0)
+                            tape[a] = (byte)temp2.getNumTimes();
+                        else
+                            tape[a] -= temp2.getNumTimes();
+                    } else
                         e.minus(temp2.getNumTimes(), temp2.getRelativeCell());
                     break;
                     
@@ -114,21 +123,63 @@ public class Generater {
                             }
                         }
                             
-                    } else {
-                        
                     }
-                        
-                    
-                    
-                    
             }
         }
     }
     
-    public void cleanInterpret(Node n){
+    public void cleanInterpret(Node n) throws IOException{
         switch(n.getType()){
             case PLUS:
-                //TODO Code logic!
+                PlusNode temp1 = (PlusNode)n;
+                int a = temp1.getRelativeCell() + index;
+                if(a==0)
+                    tape[a] = (byte)temp1.getNumTimes();
+                else
+                    tape[a] += temp1.getNumTimes();
+                break;
+                
+            case MINUS:
+                MinusNode temp2 = (MinusNode)n;
+                int b = temp2.getRelativeCell() + index;
+                if(b==0)
+                    tape[b] = (byte)temp2.getNumTimes();
+                else
+                    tape[b] += temp2.getNumTimes();
+                break;
+                
+            case INC:
+                IncNode temp3 = (IncNode)n;
+                index += temp3.getNumTimes();
+                break;
+                
+            case DEC:
+                DecNode temp4 = (DecNode)n;
+                index -= temp4.getNumTimes();
+                break;
+                
+            case GET:
+                System.err.println("Get node during clean interpret!");
+                System.exit(1);
+                break;
+                
+            case PUT:
+                PutNode temp5 = (PutNode)n;
+                e.putConstant(tape[index+temp5.getRelativeCell()]);
+                break;
+                
+            case CLEAR:
+                ClearNode temp6 = (ClearNode)n;
+                tape[index+temp6.getRelativeCell()] = 0;
+                break;
+                
+            case LOOP:
+                while(tape[index]!=0){
+                    for(Node node : n.childNodes){
+                        cleanInterpret(node);
+                    }
+                }
+                break;
         }
     }
 }

@@ -8,7 +8,7 @@ package com.drellem.bf;
 import com.drellem.bf.Node.NodeType;
 
 /**
- * Propogates pointers.
+ * Propagates pointers.
  * @author Daniel Miller <a href="mailto:gate46dmiller@gmail.com">gate46dmiller@gmail.com</a>
  */
 public class PointerClass implements OpPass{
