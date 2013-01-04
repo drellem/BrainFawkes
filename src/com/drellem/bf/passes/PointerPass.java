@@ -14,11 +14,12 @@ import com.drellem.bf.Node.NodeType;
  * @author Daniel Miller <a href="mailto:gate46dmiller@gmail.com">gate46dmiller@gmail.com</a>
  */
 public class PointerPass implements OpPass{
-    private ASTree returnTree = new ASTree();
     private boolean nest = false;
+    Node no = new Node();
 
     @Override
     public ASTree pass(ASTree tree) {
+        ASTree returnTree = new ASTree();
         Node n;
         int relativeIndex = 0;
         while(tree.hasNext()){
@@ -62,6 +63,7 @@ public class PointerPass implements OpPass{
                     relativeIndex = 0;
                     System.out.println(nest);
                     nest = true;
+                    n.addNode(n.incNode(relativeIndex));
                     returnTree.append(pass(n.toTree()));
                     break;
                     
@@ -74,7 +76,8 @@ public class PointerPass implements OpPass{
                     System.err.println("Unrecognized node: " + n.getType());
             }
         }
-        nest = false;    
+        nest = false;
+        returnTree.append(no.incNode(relativeIndex));
         return returnTree;
     }
     

@@ -24,7 +24,7 @@ public class OptTest {
             f.createNewFile();
             w = new BufferedWriter(new FileWriter("hello.b"));
             r = new BufferedReader(new FileReader("hello.bc"));
-            w.write(">++++++++++ Initialize counter" +
+            w.write("++++++++++ Initialize counter" +
                     "[" +
                     ">+++++ ++" +
                     ">+++++ +++++" +
