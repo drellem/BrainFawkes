@@ -61,6 +61,7 @@ public class Generater {
                         tape[index+temp2.getRelativeCell()] -= temp2.getNumTimes();
                     else
                         e.minus(temp2.getNumTimes(), temp2.getRelativeCell());
+                    break;
                     
                 case INC:
                     temp3 = (IncNode)node;
@@ -68,6 +69,7 @@ public class Generater {
                         index += temp3.getNumTimes();
                     else
                         e.inc(temp3.getNumTimes());
+                    break;
                     
                 case DEC:
                     temp4 = (DecNode)node;
@@ -75,14 +77,58 @@ public class Generater {
                         index -= temp4.getNumTimes();
                     else
                         e.dec(temp4.getNumTimes());
+                    break;
                     
                 case GET:
                     temp5 = (GetNode)node;
+                    canInterpret = false;
+                    e.get(temp5.getRelativeCell());
+                    break;
                     
+                case PUT:
+                    temp6 = (PutNode)node;
+                    if(canInterpret)
+                        e.putConstant(tape[index+temp6.getRelativeCell()]);
+                    else
+                        e.put(temp6.getRelativeCell());
+                    break;
+                    
+                case CLEAR:
+                    temp7 = (ClearNode)node;
+                    if(canInterpret)
+                        tape[index+temp7.getRelativeCell()] = 0;
+                    else
+                        e.clear(temp7.getRelativeCell());
+                    break;
+                    
+                case LOOP:
+                    temp8 = (LoopNode)node;
+                    if(canInterpret){
+                        if(!temp8.interpretable()){
+                            canInterpret = false;
+                        } else {
+                            while(tape[index]!=0){
+                                for(Node n : node.childNodes){
+                                    cleanInterpret(n);
+                                }
+                            }
+                        }
+                            
+                    } else {
+                        
+                    }
+                        
                     
                     
                     
             }
+        }
+    }
+    
+    public void cleanInterpret(Node n){
+        switch(n.getType()){
+            case PLUS:
+                //TODO Code logic!
         }
     }
 }
