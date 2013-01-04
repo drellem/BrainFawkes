@@ -5,13 +5,15 @@
 
 package com.drellem.bf;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Daniel Miller <a href="mailto:gate46dmiller@gmail.com">gate46dmiller@gmail.com</a>
  */
 public class Node {
-    public Node[] childNodes;
-    public void addNode(Node n){ childNodes[childNodes.length] = n; }
+    public ArrayList<Node> childNodes = new ArrayList<Node>();
+    public void addNode(Node n){ childNodes.add(n); }
     public void addTree(ASTree tree){
         while(tree.hasNext()){
             addNode(tree.getNext());
@@ -24,7 +26,7 @@ public class Node {
         }
         return ret;
     }
-    public int numberOfChildren(){ return childNodes.length; }
+    public int numberOfChildren(){ return childNodes.size(); }
     public NodeType getType(){ return NodeType.NONE; }
     
     public PlusNode plusNode(int relativeCell, int numTimes){ return new PlusNode(relativeCell, numTimes); }

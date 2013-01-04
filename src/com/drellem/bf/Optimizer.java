@@ -8,6 +8,7 @@ package com.drellem.bf;
 import com.drellem.bf.passes.OpPass;
 import com.drellem.bf.passes.PointerPass;
 import com.drellem.bf.Token.TokenType;
+import com.drellem.bf.passes.CleanPass;
 import com.drellem.bf.passes.CopyClearPass;
 
 /**
@@ -18,7 +19,7 @@ public class Optimizer {
     private TokenStream tokens;
     private ASTree tree = new ASTree();
     private Node node = new Node();
-    private OpPass[] passes = { new CopyClearPass(), new PointerPass() };
+    private OpPass[] passes = { new CopyClearPass(), new PointerPass(), new CleanPass() };
     
     public Optimizer(TokenStream tokens){
         this.tokens = tokens;
@@ -26,6 +27,9 @@ public class Optimizer {
     
     public ASTree run(){
         tree = parse(false, tokens);
+        for (OpPass p : passes){
+            tree = p.pass(tree);
+        }
         return tree;
     }
     
@@ -78,6 +82,7 @@ public class Optimizer {
                 case LOOP:
                     Node n = node.loopNode();
                     n.addTree(parse(true, tokens));
+                    tree.append(n);
                     break;
                     
                 case END:

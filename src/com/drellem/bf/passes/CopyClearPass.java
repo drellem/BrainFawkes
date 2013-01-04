@@ -25,10 +25,10 @@ public class CopyClearPass implements OpPass{
                 
                 case LOOP:
                     if(n.numberOfChildren()==1){
-                        if(n.childNodes[0] instanceof Node.PlusNode || n.childNodes[0] instanceof Node.MinusNode){
+                        if(n.childNodes.get(0) instanceof Node.PlusNode || n.childNodes.get(0) instanceof Node.MinusNode){
                             returnTree.append(n.clearNode(0));
-                        }
-                    }
+                        } else returnTree.append(n);
+                    } else returnTree.append(n);
                     break;
                     
                     

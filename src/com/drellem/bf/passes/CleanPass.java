@@ -46,7 +46,8 @@ public class CleanPass implements OpPass{
                     break;
                     
                 default:
-                    System.err.println("Unrecognized node: " + n.getType());
+                    //System.err.println("Unrecognized node: " + n.getType());
+                    returnTree.append(n);
             }
         }
         
