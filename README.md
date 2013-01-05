@@ -5,16 +5,16 @@ Multitarget Optimizing Brainfuck Compiler
 
 This compiler is implemented in Java, and currently targets Java. The code-emitting backend is pluggable, and can be extended by implementing <code>com.drellem.bf.emit.Emitter</code> to add support for different language targets. 
 
-<b>Status</b>
+<b>Status</b><br>
 It can currently compile the standard "Hello world!" program.
 
-<b>How to Use</b>
+<b>How to Use</b><br>
 Command-line operation has not been developed yet, but you can run some of the files under <code>com.drellem.bf.test</code> for an example.
 
-<b>How can I help?</b>
+<b>How can I help?</b><br>
 Write a class implementing <code>com.drellem.bf.emit.Emitter</code> to output code in your favorite language. It's very easy, and you can look at <code>JavaEmitter</code> as an example.
 
-<b>Stages</b>
+<b>Stages</b><br>
 
 Hello world: <code>+++++ +++++             initialize counter (cell #0) to 10[                       use loop to set the next four cells to 70/100/30/10 > +++++ ++              add  7 to cell #1> +++++ +++++           add 10 to cell #2 > +++    > +                     add  1 to cell #4<<<< -                  decrement counter (cell #0)]                   > ++ .                  print 'H'> + .                   print 'e'+++++ ++ .              print 'l'.                       print 'l'+++ .                   print 'o'> ++ .                  print ' '<< +++++ +++++ +++++ .  print 'W'> .                     print 'o'+++ .                   print 'r'----- - .               print 'l'----- --- .             print 'd'> + .                   print '!'> .                     print '
 '</code>
