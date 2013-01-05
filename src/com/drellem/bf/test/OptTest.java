@@ -60,14 +60,15 @@ public class OptTest {
         Optimizer opt = new Optimizer(t);
         ASTree tree = opt.run();
         Node n;
-        /**
+        
         while(tree.hasNext()){
             n = tree.getNext();
-            System.out.println("Type:" + n.getType().toString());
+            System.out.print("(" + n.getType().toString());
             for (Node no : n.childNodes){
-                System.out.println("->Type:"+no.getType().toString());
+                System.out.println(no.getType().toString());
             }
+            System.out.print(")");
         }
-        * */
+        
     }
 }

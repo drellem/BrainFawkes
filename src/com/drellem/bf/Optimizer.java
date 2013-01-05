@@ -85,10 +85,8 @@ public class Optimizer {
                 case MINUS:
                     if(t.getValue().equals("")){
                         tree.append(node.minusNode(0,1));
-                        System.out.println("Minused!");
                         break;
                     }
-                    System.out.println("2Minused!");
                     tree.append(node.minusNode(0, Integer.parseInt(t.getValue())));
                     break;
                     

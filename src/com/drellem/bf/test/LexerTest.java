@@ -65,7 +65,7 @@ public class LexerTest {
         TokenStream t = new Lexer().lex("hello.b");
         while(t.hasNext()){
             Token token = t.getNext();
-            System.out.println("Token type:" + token.getType() + " value:" + token.getValue());
+            System.out.print("("+token.getType() + "," + token.getValue() + ")");
         }
     }
 
