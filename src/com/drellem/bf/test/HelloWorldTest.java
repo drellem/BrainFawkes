@@ -79,7 +79,7 @@ public class HelloWorldTest {
                 }
             }
             * */
-            generator = new Generator(tree, new JavaEmitter("Main.java"), "Main.java");
+            generator = new Generator(tree, new JavaEmitter());
             generator.generate();
         } catch (IOException ex) {
             Logger.getLogger(HelloWorldTest.class.getName()).log(Level.SEVERE, null, ex);

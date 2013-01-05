@@ -25,10 +25,10 @@ public class Generator {
     private BufferedWriter ostream;
     private boolean canInterpret = true;
     
-    public Generator(ASTree tree, Emitter e, String outputFile) throws IOException{
+    public Generator(ASTree tree, Emitter e) throws IOException{
         this.tree = tree;
         this.e = e;
-        this.outputFile = outputFile;
+        this.outputFile = e.getFileName();
         ostream = new BufferedWriter(new FileWriter(outputFile));
     }
     /**Begins code generation*/
@@ -47,7 +47,6 @@ public class Generator {
         
         while(tree.hasNext()){
             node = tree.getNext();
-            System.out.println(node.getType());
             switch(node.getType()){
                 
                 case PLUS:
@@ -94,7 +93,6 @@ public class Generator {
                     
                 case PUT:
                     temp6 = (PutNode)node;
-                    System.out.println("Print:" + tape[index+temp6.getRelativeCell()]);
                     if(canInterpret){
                         e.putConstant(tape[index+temp6.getRelativeCell()]); break;
                     } else
@@ -117,7 +115,6 @@ public class Generator {
                         } else {
                             while(tape[index]!=0){
                                 for(Node n : node.childNodes){
-                                    System.out.println("->"+n.getType().toString());
                                     cleanInterpret(n);
                                 }
                             }
@@ -131,7 +128,6 @@ public class Generator {
             }
         }
         e.end();
-        System.out.println("Gen closing.");
         ostream.close();
         e.close();
     }

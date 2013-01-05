@@ -10,7 +10,7 @@ import com.drellem.bf.Node;
 import com.drellem.bf.Node.NodeType;
 
 /**
- *
+ * Converts <code>[-]</code> and <code>[+]</code> to a <code>ClearNode</code>.
  * @author Daniel Miller <a href="mailto:gate46dmiller@gmail.com">gate46dmiller@gmail.com</a>
  */
 public class CopyClearPass implements OpPass{

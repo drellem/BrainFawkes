@@ -36,7 +36,6 @@ public class CleanPass implements OpPass{
                     
                 case MINUS:
                     Node.MinusNode temp1 = (Node.MinusNode)n;
-                    System.out.println("Minus:" + temp1.getNumTimes());
                     if(temp1.getNumTimes()!=0)returnTree.append(temp1);
                     break;
                     

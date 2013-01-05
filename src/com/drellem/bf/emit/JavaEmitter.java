@@ -10,16 +10,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- *
+ * Outputs Java source code.
  * @author Daniel Miller <a href="mailto:gate46dmiller@gmail.com">gate46dmiller@gmail.com</a>
  */
 public class JavaEmitter implements Emitter{
-    private String outputFile;
+    private String outputFile = "Main.java";
     private BufferedWriter ostream;
 
     
-    public JavaEmitter(String outputFile) throws IOException{
-        this.outputFile = outputFile;
+    public JavaEmitter() throws IOException{
         this.ostream = new BufferedWriter(new FileWriter(outputFile));
     }
     
@@ -93,6 +92,11 @@ public class JavaEmitter implements Emitter{
     @Override
     public void close() throws IOException {
         ostream.close();
+    }
+
+    @Override
+    public String getFileName() {
+        return outputFile;
     }
 
 }

@@ -24,7 +24,6 @@ public class PointerPass implements OpPass{
         int relativeIndex = 0;
         while(tree.hasNext()){
             n = tree.getNext();
-            System.out.println("Pre; Type:" + n.getType().toString());
             switch(n.getType()){
                 
                 case PLUS:
@@ -61,7 +60,6 @@ public class PointerPass implements OpPass{
                 case LOOP:
                     returnTree.append(n.incNode(relativeIndex));
                     relativeIndex = 0;
-                    System.out.println(nest);
                     nest = true;
                     n.addNode(n.incNode(relativeIndex));
                     returnTree.append(pass(n.toTree()));
