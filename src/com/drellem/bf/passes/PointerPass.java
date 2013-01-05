@@ -34,7 +34,7 @@ public class PointerPass implements OpPass{
                     
                 case MINUS:
                     Node.MinusNode temp1 = (Node.MinusNode)n;
-                    returnTree.append(n.minusNode(relativeIndex, temp1.getRelativeCell()));
+                    returnTree.append(n.minusNode(relativeIndex, temp1.getNumTimes()));
                     break;
                     
                 case INC:

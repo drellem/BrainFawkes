@@ -69,6 +69,7 @@ public class Lexer {
             
             case '-':
                 tokens.append(new Token(Token.TokenType.MINUS, buildInts));
+                //System.out.println("Lex:" + buildInts);
                 buildInts = "";
                 interpret(istream.read());
                 break;

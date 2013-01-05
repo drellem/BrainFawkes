@@ -52,9 +52,7 @@ public class Generator {
                     temp1 = (PlusNode)node;
                     if(canInterpret){
                         int a = index + temp1.getRelativeCell();
-                        if(a==0)
-                            tape[a] = (byte)temp1.getNumTimes();
-                        else tape[a] += temp1.getNumTimes();   
+                        tape[a] += temp1.getNumTimes();   
                     } 
                         
                      else 
@@ -65,10 +63,7 @@ public class Generator {
                     temp2 = (MinusNode)node;
                     if(canInterpret){
                         int a = index + temp2.getRelativeCell();
-                        if(a==0)
-                            tape[a] = (byte)temp2.getNumTimes();
-                        else
-                            tape[a] -= temp2.getNumTimes();
+                        tape[a] -= temp2.getNumTimes();
                     } else
                         e.minus(temp2.getNumTimes(), temp2.getRelativeCell());
                     break;
@@ -118,6 +113,11 @@ public class Generator {
                             canInterpret = false;
                         } else {
                             while(tape[index]!=0){
+                                System.out.println("Index:"+index);
+                                for(int i = 0; i < 10; i++){
+                                    System.out.println(tape[i]);
+                                }
+                                System.out.println("Oh my glob!");
                                 for(Node n : node.childNodes){
                                     cleanInterpret(n);
                                 }
@@ -125,8 +125,10 @@ public class Generator {
                         }
                             
                     }
+                    break;
             }
         }
+        ostream.close();
     }
     /*Interprets a node, instead of generating code*/
     public void cleanInterpret(Node n) throws IOException{
@@ -134,21 +136,14 @@ public class Generator {
             case PLUS:
                 PlusNode temp1 = (PlusNode)n;
                 int a = temp1.getRelativeCell() + index;
-                if(a==0)
-                    tape[a] = (byte)temp1.getNumTimes();
-                else
-                    tape[a] += temp1.getNumTimes();
+                tape[a] += temp1.getNumTimes();
                 break;
-                
             case MINUS:
+                System.out.println("!!!!!!!!!!!!");
                 MinusNode temp2 = (MinusNode)n;
                 int b = temp2.getRelativeCell() + index;
-                if(b==0)
-                    tape[b] = (byte)temp2.getNumTimes();
-                else
-                    tape[b] += temp2.getNumTimes();
+                tape[b] -= temp2.getNumTimes();
                 break;
-                
             case INC:
                 IncNode temp3 = (IncNode)n;
                 index += temp3.getNumTimes();

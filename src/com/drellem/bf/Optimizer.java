@@ -5,6 +5,8 @@
 
 package com.drellem.bf;
 
+import com.drellem.bf.Node.LoopNode;
+import com.drellem.bf.Node.MinusNode;
 import com.drellem.bf.Node.PlusNode;
 import com.drellem.bf.passes.OpPass;
 import com.drellem.bf.passes.PointerPass;
@@ -32,28 +34,30 @@ public class Optimizer {
     public ASTree run(){
         tree = parse(false, tokens);
         //System.out.println(passes.length);
-        
-        for (OpPass p : passes){
-            tree = p.pass(tree);
+        Node n;
+        PlusNode pn;
+        MinusNode mn;
+        for(OpPass pass : passes){
+            tree = pass.pass(tree);
         }
         
         //PlusNode p;
-        Node n;
-        while(tree.hasNext()){
-            n = tree.getNext();/*
-            if(n instanceof PlusNode){
-                p = (PlusNode)n;
-                System.out.println("Type:" + n.getType().toString()+ " Cell:" + p.getRelativeCell());
-            } else*/
-            System.out.println("Type:" + n.getType().toString());
-            for (Node no : n.childNodes){
+      //  Node n;
+       // while(tree.hasNext()){
+         //   n = tree.getNext();/*
+          //  if(n instanceof PlusNode){
+          //      p = (PlusNode)n;
+          //      System.out.println("Type:" + n.getType().toString()+ " Cell:" + p.getRelativeCell());
+            //} else*/
+          //  System.out.println("Type:" + n.getType().toString());
+           // for (Node no : n.childNodes){
                /* if(no instanceof PlusNode){
                     p = (PlusNode)no;
                     System.out.println("Type:" + n.getType().toString()+ " Cell:" + p.getRelativeCell());
                 } else*/
-                System.out.println("->Type:"+no.getType().toString());
-            }
-        }
+              //  System.out.println("->Type:"+no.getType().toString());
+            //}
+       // }
         
         //tree = passes[2].pass(tree);
         return tree;
@@ -81,8 +85,10 @@ public class Optimizer {
                 case MINUS:
                     if(t.getValue().equals("")){
                         tree.append(node.minusNode(0,1));
+                        System.out.println("Minused!");
                         break;
                     }
+                    System.out.println("2Minused!");
                     tree.append(node.minusNode(0, Integer.parseInt(t.getValue())));
                     break;
                     

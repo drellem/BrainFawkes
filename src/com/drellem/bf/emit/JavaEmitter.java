@@ -89,4 +89,9 @@ public class JavaEmitter implements Emitter{
         ostream.write("\t\tSystem.out.println(" + (char)b + ");\n");
     }
 
+    @Override
+    public void close() throws IOException {
+        ostream.close();
+    }
+
 }

@@ -27,141 +27,37 @@ public class CleanPass implements OpPass{
         Node n;
         while(tree.hasNext()){
             n = tree.getNext();
-            
             switch(n.getType()){
                 
                 case PLUS:
                     Node.PlusNode temp = (Node.PlusNode)n;
-                    if(lookingFor.equals("inc")){
-                        if(numTimes>0){
-                            returnTree.append(n.incNode(numTimes));
-                        } else if (numTimes < 0) returnTree.append(n.decNode(0-numTimes));
-                        lookingFor = "none";
-                        numTimes = 0;
-                        relativeCell = 0;
-                    }
-                     //System.out.println("Deleted PLUS");
-                    if(lookingFor.equals("plus")){
-                        if(relativeCell==temp.getRelativeCell()){
-                            System.out.println("Must concatenate!");
-                            numTimes += temp.getNumTimes();
-                        } else {
-                            returnTree.append(n.plusNode(relativeCell, numTimes));
-                            relativeCell =temp.getRelativeCell();
-                            numTimes = temp.getNumTimes();
-                        } 
-                    } else {
-                        lookingFor="plus";
-                        relativeCell=temp.getRelativeCell();
-                        numTimes=temp.getNumTimes();
-                    }
+                    if(temp.getNumTimes()!=0)returnTree.append(temp);
                     break;
                     
                 case MINUS:
                     Node.MinusNode temp1 = (Node.MinusNode)n;
-                    if(lookingFor.equals("inc")){
-                        if(numTimes>0) returnTree.append(n.incNode(numTimes));
-                        else if (numTimes < 0) returnTree.append(n.decNode(0-numTimes));
-                        lookingFor = "none";
-                        numTimes = 0;
-                        relativeCell = 0;
-                    }
-                    
-                     if(lookingFor.equals("plus")){
-                        if(relativeCell==temp1.getRelativeCell()){
-                            numTimes += temp1.getNumTimes();
-                        } else {
-                            returnTree.append(n.plusNode(relativeCell, numTimes));
-                            relativeCell =temp1.getRelativeCell();
-                            numTimes = -temp1.getNumTimes();
-                        }
-                    } else {
-                        lookingFor="plus";
-                        relativeCell=temp1.getRelativeCell();
-                        numTimes=-temp1.getNumTimes();
-                    }
+                    System.out.println("Minus:" + temp1.getNumTimes());
+                    if(temp1.getNumTimes()!=0)returnTree.append(temp1);
                     break;
                     
                 case INC:
                     Node.IncNode temp2 = (Node.IncNode)n;
-                    if(lookingFor.equals("plus")){
-                        if(numTimes>0) returnTree.append(n.plusNode(relativeCell, numTimes));
-                        else if (numTimes<0) returnTree.append(n.minusNode(relativeCell, 0-numTimes));
-                        lookingFor = "none";
-                        numTimes = 0;
-                        relativeCell = 0;
-                    }
-                    
-                        lookingFor = "inc";
-                        numTimes += temp2.getNumTimes();
-                    
+                    if(temp2.getNumTimes()!=0)returnTree.append(temp2);
                     break;
                     
                 case DEC:
                     Node.DecNode temp3 = (Node.DecNode)n;
-                    if(lookingFor.equals("plus")){
-                        if(numTimes>0) returnTree.append(n.plusNode(relativeCell, numTimes));
-                        else if (numTimes<0) returnTree.append(n.minusNode(relativeCell, 0-numTimes));
-                        lookingFor = "none";
-                        numTimes = 0;
-                        relativeCell = 0;
-                    }
-                    
-                        lookingFor = "inc";
-                        numTimes -= temp3.getNumTimes();
-                    
+                    if(temp3.getNumTimes()!=0)returnTree.append(temp3);
                     break;
                     
                 case LOOP:
-                    Node.LoopNode temp4 = (Node.LoopNode)n;
-                    if(lookingFor.equals("plus")){
-                        System.err.println("Plus!");
-                        if(numTimes>0)returnTree.append(n.plusNode(relativeCell, numTimes));
-                        else if (numTimes<0) returnTree.append(n.minusNode(relativeCell, 0-numTimes));
-                        
-                    } else if (lookingFor.equals("inc")){
-                        if(numTimes>0)returnTree.append(n.incNode(numTimes));
-                        else if (numTimes<0) returnTree.append(n.decNode(0-numTimes));
-                        
-                    }
-                    lookingFor = "none";
-                    numTimes = 0;
-                    relativeCell = 0;
                     returnTree.append(pass(n.toTree()));
                     break;
                     
                 default:
-                    if(lookingFor.equals("plus")){
-                        if(numTimes>0)returnTree.append(n.plusNode(relativeCell, numTimes));
-                        else if (numTimes<0) returnTree.append(n.minusNode(relativeCell, 0-numTimes));
-                        
-                    } else if (lookingFor.equals("inc")){
-                        if(numTimes>0)returnTree.append(n.incNode(numTimes));
-                        else if (numTimes<0) returnTree.append(n.decNode(0-numTimes));
-                        
-                    }
-                    lookingFor = "none";
-                        numTimes = 0;
-                        relativeCell = 0;
-                    //System.err.println("Unrecognized node: " + n.getType());
                     returnTree.append(n);
             }
         }
-        if(lookingFor.equals("plus")){
-                        if(numTimes>0)returnTree.append(node.plusNode(relativeCell, numTimes));
-                        else if (numTimes<0) returnTree.append(node.minusNode(relativeCell, 0-numTimes));
-                        
-                    } else if (lookingFor.equals("inc")){
-                        if(numTimes>0)returnTree.append(node.incNode(numTimes));
-                        else if (numTimes<0) returnTree.append(node.decNode(0-numTimes));
-                        
-                    }
-                    lookingFor = "none";
-                        numTimes = 0;
-                        relativeCell = 0;
-                    //System.err.println("Unrecognized node: " + n.getType());
-        
         return returnTree;
     }
-
 }
