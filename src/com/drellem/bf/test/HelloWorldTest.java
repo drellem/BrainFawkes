@@ -29,23 +29,27 @@ public class HelloWorldTest {
             f.createNewFile();
             w = new BufferedWriter(new FileWriter("hello.b"));
             r = new BufferedReader(new FileReader("hello.bc"));
-            w.write("++++++++++ Initialize counter" +
-                    "[" +
-                    ">+++++ ++" +
-                    ">+++++ +++++" +
-                    ">++" +
-                    ">+" +
-                    "<<<<-" +
-                    "]" +
-                    ">++." +
-                    ">+." +
-                    "+++++ ++." +
-                    "." +
-                    "+++." +
-                    "----- -." +
-                    "----- ---." +
-                    ">+." +
-                    ">."  
+            w.write("+++++ +++++             initialize counter (cell #0) to 10"+
+"[                       use loop to set the next four cells to 70/100/30/10"+
+   " > +++++ ++              add  7 to cell #1"+
+    "> +++++ +++++           add 10 to cell #2 "+
+    "> +++"+
+     "    > +                     add  1 to cell #4"+
+    "<<<< -                  decrement counter (cell #0)"+
+"]                   "+
+"> ++ .                  print 'H'"+
+"> + .                   print 'e'"+
+"+++++ ++ .              print 'l'"+
+".                       print 'l'"+
+"+++ .                   print 'o'"+
+"> ++ .                  print ' '"+
+"<< +++++ +++++ +++++ .  print 'W'"+
+"> .                     print 'o'"+
+"+++ .                   print 'r'"+
+"----- - .               print 'l'"+
+"----- --- .             print 'd'"+
+"> + .                   print '!'"+
+"> .                     print '\n'"  
                     );
             w.flush();
             //System.out.print(r.readLine());
@@ -75,7 +79,7 @@ public class HelloWorldTest {
                 }
             }
             * */
-            generator = new Generator(tree, new JavaEmitter("Hello.java"), "Hello.java");
+            generator = new Generator(tree, new JavaEmitter("Main.java"), "Main.java");
             generator.generate();
         } catch (IOException ex) {
             Logger.getLogger(HelloWorldTest.class.getName()).log(Level.SEVERE, null, ex);

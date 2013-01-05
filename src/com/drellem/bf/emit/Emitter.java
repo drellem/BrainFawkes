@@ -24,6 +24,6 @@ public interface Emitter extends Closeable{
     public void loop() throws IOException;
     public void endLoop() throws IOException;
     public void clear(int relativeCell) throws IOException;
-    public void putConstant(byte b) throws IOException;
+    public void putConstant(int b) throws IOException;
     public void end() throws IOException;
 }

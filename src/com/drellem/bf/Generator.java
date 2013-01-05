@@ -17,7 +17,7 @@ import java.io.IOException;
  * @author Daniel Miller <a href="mailto:gate46dmiller@gmail.com">gate46dmiller@gmail.com</a>
  */
 public class Generator {
-    private byte[] tape = new byte[30000];
+    private int[] tape = new int[30000];
     private int index = 0;
     private ASTree tree;
     private Emitter e;
@@ -43,9 +43,11 @@ public class Generator {
         ClearNode temp7;
         LoopNode temp8;
         
+        e.begin();
+        
         while(tree.hasNext()){
             node = tree.getNext();
-            
+            System.out.println(node.getType());
             switch(node.getType()){
                 
                 case PLUS:
@@ -92,9 +94,10 @@ public class Generator {
                     
                 case PUT:
                     temp6 = (PutNode)node;
-                    if(canInterpret)
-                        e.putConstant(tape[index+temp6.getRelativeCell()]);
-                    else
+                    System.out.println("Print:" + tape[index+temp6.getRelativeCell()]);
+                    if(canInterpret){
+                        e.putConstant(tape[index+temp6.getRelativeCell()]); break;
+                    } else
                         e.put(temp6.getRelativeCell());
                     break;
                     
@@ -113,12 +116,8 @@ public class Generator {
                             canInterpret = false;
                         } else {
                             while(tape[index]!=0){
-                                System.out.println("Index:"+index);
-                                for(int i = 0; i < 10; i++){
-                                    System.out.println(tape[i]);
-                                }
-                                System.out.println("Oh my glob!");
                                 for(Node n : node.childNodes){
+                                    System.out.println("->"+n.getType().toString());
                                     cleanInterpret(n);
                                 }
                             }
@@ -126,9 +125,15 @@ public class Generator {
                             
                     }
                     break;
+                    
+                default:
+                    System.out.println("Unrecognized node:" + node.getType().toString());
             }
         }
+        e.end();
+        System.out.println("Gen closing.");
         ostream.close();
+        e.close();
     }
     /*Interprets a node, instead of generating code*/
     public void cleanInterpret(Node n) throws IOException{
@@ -139,7 +144,6 @@ public class Generator {
                 tape[a] += temp1.getNumTimes();
                 break;
             case MINUS:
-                System.out.println("!!!!!!!!!!!!");
                 MinusNode temp2 = (MinusNode)n;
                 int b = temp2.getRelativeCell() + index;
                 tape[b] -= temp2.getNumTimes();

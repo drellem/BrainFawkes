@@ -25,9 +25,9 @@ public class JavaEmitter implements Emitter{
     
     @Override
     public void begin() throws IOException {
-        ostream.write("public class Main\n" +
-                      "\tprivate byte[] tape = new byte[30000];\n" +
-                      "\tprivate int index = 0;\n" +
+        ostream.write("public class Main {\n" +
+                      "\tprivate static byte[] tape = new byte[30000];\n" +
+                      "\tprivate static int index = 0;\n" +
                       "\tpublic static void main(String[] args){\n"           
                 );
     }
@@ -85,8 +85,9 @@ public class JavaEmitter implements Emitter{
     }
 
     @Override
-    public void putConstant(byte b) throws IOException {
-        ostream.write("\t\tSystem.out.println(" + (char)b + ");\n");
+    public void putConstant(int b) throws IOException {
+        if(b==10)ostream.write("\t\tSystem.out.println();\n");
+        else ostream.write("\t\tSystem.out.print(\"" + (char)b + "\");\n");
     }
 
     @Override
