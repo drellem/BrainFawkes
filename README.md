@@ -24,7 +24,7 @@ Hello world: <code>+++++ +++++             initialize counter (cell #0) to 10[  
   The Brainfuck code is compressed so that <code>++---<<>>>>>></code> will become <code>-2>></code>.
   Hello world: <code>10+[>7+>10+>3+>+4<-]>2+.>+.7+..3+.>2+.2<15+.>.3+.6-.8-.>+.>.</code>
   
-  </li>Lexing</li>
+  <li>Lexing</li>
   Tokens are formed from this compressed code.
   Hello world: <code>(PLUS,10)(LOOP,[)(INC,)(PLUS,7)(INC,)(PLUS,10)(INC,)(PLUS,2)(INC,)(PLUS,)(DEC,4)(MINUS,)(END,])(INC,)(PLUS,2)(PUT,.)(INC,)(PLUS,)(PUT,.)(PLUS,7)(PUT,.)(PUT,.)(PLUS,3)(PUT,.)(MINUS,6)(PUT,.)(MINUS,8)(PUT,.)(INC,)(PLUS,)(PUT,.)(INC,)(PUT,.)
 </code>.
