@@ -21,15 +21,12 @@ public class Generator {
     private int index = 0;
     private ASTree tree;
     private Emitter e;
-    private String outputFile;
-    private BufferedWriter ostream;
+
     private boolean canInterpret = true;
     
     public Generator(ASTree tree, Emitter e) throws IOException{
         this.tree = tree;
         this.e = e;
-        this.outputFile = e.getFileName();
-        ostream = new BufferedWriter(new FileWriter(outputFile));
     }
     /**Begins code generation*/
     public void generate() throws IOException{
@@ -128,7 +125,6 @@ public class Generator {
             }
         }
         e.end();
-        ostream.close();
         e.close();
     }
     /*Interprets a node, instead of generating code*/

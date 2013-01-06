@@ -15,11 +15,6 @@ import java.io.IOException;
  */
 public interface Emitter extends Closeable{
     /**
-     * The path of the file that the target code will be written to.
-     * @return 
-     */
-    public String getFileName();
-    /**
      * Writes the header of the target program.
      * @throws IOException 
      */

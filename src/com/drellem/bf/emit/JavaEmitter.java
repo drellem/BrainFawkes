@@ -93,10 +93,4 @@ public class JavaEmitter implements Emitter{
     public void close() throws IOException {
         ostream.close();
     }
-
-    @Override
-    public String getFileName() {
-        return outputFile;
-    }
-
 }

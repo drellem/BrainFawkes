@@ -147,6 +147,10 @@ public class Node {
         public NodeType getType(){ return NodeType.CLEAR; }
         public int getRelativeCell(){ return relativeCell; }
     }
+    
+    public class PutConstNode extends PutNode {
+        public PutConstNode(int relativeCell){ super(relativeCell);}
+    }
 
     public enum NodeType {
         PLUS, MINUS, INC, DEC, GET, PUT, LOOP, CLEAR, NONE
