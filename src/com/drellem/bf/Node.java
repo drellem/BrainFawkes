@@ -132,6 +132,17 @@ public class Node {
             }
             return true;
         }
+        
+        /**
+         * Determines if the loop is a simple loop.
+         * @return False if not, and false if pointer propagation has not been done. True otherwise.
+         */
+        public boolean isSimpleLoop(){
+            for(Node n : childNodes){
+                if(n instanceof GetNode || n instanceof LoopNode || n instanceof IncNode || n instanceof DecNode)return false;
+            }
+            return true;
+        }
         @Override
         public NodeType getType(){ return NodeType.LOOP; }
     }
@@ -150,6 +161,29 @@ public class Node {
     
     public class PutConstNode extends PutNode {
         public PutConstNode(int relativeCell){ super(relativeCell);}
+    }
+    
+    public class MultNode extends Node {
+        private int f1Loc, f2Loc, pLoc;
+        private boolean adding;
+        /**
+         * 
+         * @param f1Loc The relative index of the first factor.
+         * @param f2Loc The relative index of the second factor.
+         * @param pLoc  The relative index to store the product in.
+         * @param adding True if index <b>+=</b> f1Loc*f2Loc.
+         */
+        public MultNode(int f1Loc, int f2Loc, int pLoc, boolean adding){
+            this.f1Loc = f1Loc;
+            this.f2Loc = f2Loc;
+            this.pLoc = pLoc;
+            this.adding = adding;
+        }
+        
+        public int getF1(){ return f1Loc; }
+        public int getF2(){ return f2Loc; }
+        public int getP(){ return pLoc; }
+        public boolean adding(){ return adding; }
     }
 
     public enum NodeType {

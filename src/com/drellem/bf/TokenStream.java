@@ -25,6 +25,10 @@ public class TokenStream {
         tokens.add(token);
     }
     
+    public void append(TokenStream stream){
+        while(stream.hasNext()) append(stream.getNext());
+    }
+    
     public void setLocation(int location){
         this.location = location;
     }
@@ -35,5 +39,12 @@ public class TokenStream {
     
     public boolean hasNext(){
         return (location < tokens.size()-1);
+    }
+    
+    @Override
+    public TokenStream clone(){
+        TokenStream ret = new TokenStream();
+        ret.append(this);
+        return ret;
     }
 }
