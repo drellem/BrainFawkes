@@ -45,6 +45,7 @@ public class SimpleLoopPass implements OpPass{
         TokenStream iStream = new TokenStream();
         Token t;
         int incCounter = 0;
+
         while(stream.hasNext()){
             t = stream.getNext();
             switch(t.getType()){
@@ -68,7 +69,23 @@ public class SimpleLoopPass implements OpPass{
                 t = iStream.getNext();
                 switch(t.getType()){
                     case PLUS:
-                        returnStream.append(new Token())
+                        returnStream.append(new Token(TokenType.MULT, t.getNumTimes(), t.getRelativeCell(), true));
+                        break;
+                        
+                    case MINUS:
+                        returnStream.append(new Token(TokenType.MULT, t.getNumTimes(), t.getRelativeCell(), false));
+                        break;
+                        
+                    case MULT:
+                        returnStream.append(new Token(TokenType.EXP, t.getNumTimes(), t.getRelativeCell(), t.getAdding()));
+                        break;
+                    case PUT:
+                    case GET:
+                        returnStream.append(new Token(TokenType.LOOP, ""));
+                        returnStream.append(t);
+                        returnStream.append(new Token(TokenType.END, ""));
+                        break;
+
                 }
             }
         }

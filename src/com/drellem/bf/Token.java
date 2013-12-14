@@ -15,7 +15,7 @@ public class Token {
     private int f1Loc, f2Loc, pLoc;
     private boolean adding;
     public enum TokenType {
-        PLUS, MINUS, INC, DEC, PUT, GET, LOOP, END, CLEAR, MULT
+        PLUS, MINUS, INC, DEC, PUT, GET, LOOP, END, CLEAR, MULT, EXP
     }
     private TokenType type;
     private String value;
@@ -31,11 +31,17 @@ public class Token {
         this.relativeCell = relativeCell;
     }
     
-    public Token(int f1Loc, int f2Loc, int pLoc, boolean adding){
+    public Token(TokenType t, int numTimes, int relativeCell, boolean adding){
+        if(t==TokenType.MULT)
         this.type = TokenType.MULT;
-        this.f1Loc = f1Loc;
-        this.f2Loc = f2Loc;
-        this.pLoc = pLoc;
+        else if(t==TokenType.EXP)
+            this.type = TokenType.EXP;
+        else {
+            System.err.println("Token.Token(TokenType,int,int,boolean), t==" + t.toString());
+            System.exit(1);
+        }
+        this.numTimes = numTimes;
+        this.relativeCell = relativeCell;
         this.adding = adding;
     }
     
@@ -49,5 +55,5 @@ public class Token {
     public int getP(){ return pLoc; }
     public boolean getAdding(){ return adding; }
     
-    //p[product+index] += p[product+index]*p[0+index]; p[0+index]=0;
+    //p[product+index] += numTimes*p[0+index]; p[0+index]=0;
 }
